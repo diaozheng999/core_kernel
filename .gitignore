@@ -2,4 +2,8 @@ _build
 *.install
 *.merlin
 _opam
-
+**/lib/
+**/.bsb.lock
+**/*.bs.js
+**/_ppx
+**/node_modules
