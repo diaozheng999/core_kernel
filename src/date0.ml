@@ -119,9 +119,6 @@ module Stable = struct
         let of_int_exn n = create_exn ~y:(year n) ~m:(month n) ~d:(day n)
         let invalid_value__for_internal_use_only = 0
 
-        let%test "invalid value" =
-          Exn.does_raise (fun () : t -> of_int_exn invalid_value__for_internal_use_only)
-        ;;
       end
 
       include T

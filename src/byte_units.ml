@@ -250,35 +250,6 @@ module Short = struct
 
   let sexp_of_t t = Sexp.Atom (to_string t)
 
-  let%expect_test _ =
-    printf !"%{}" (of_bytes_int 1000);
-    [%expect {| 1000B |}];
-    printf !"%{}" (of_bytes_int 1023);
-    [%expect {| 1023B |}];
-    printf !"%{}" (of_bytes_int 1024);
-    [%expect {| 1.00K |}];
-    printf !"%{}" (of_bytes_int 1025);
-    [%expect {| 1.00K |}];
-    printf !"%{}" (of_bytes_int 10000);
-    [%expect {| 9.77K |}];
-    printf !"%{}" (of_bytes_int 100000);
-    [%expect {| 97.7K |}];
-    printf !"%{}" (of_bytes_int 1000000);
-    [%expect {| 977K |}];
-    printf !"%{}" (of_bytes_int 10000000);
-    [%expect {| 9.54M |}];
-    printf !"%{}" (of_bytes 10000000000.);
-    [%expect {| 9.31G |}];
-    printf !"%{}" (of_bytes 1000000000000.);
-    [%expect {| 931G |}];
-    printf !"%{}" (of_bytes 100000000000000.);
-    [%expect {| 90.9T |}];
-    printf !"%{}" (of_bytes 100000000000000000.);
-    [%expect {| 88.8P |}];
-    printf !"%{}" (of_bytes 3000000000000000000.);
-    [%expect {| 2.60E |}];
-    ()
-  ;;
 end
 
 let to_string_short = Short.to_string

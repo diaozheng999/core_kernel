@@ -10,10 +10,6 @@ module Stable = struct
     include T
     include Comparator.Stable.V1.Make (T)
 
-    let%expect_test _ =
-      print_endline [%bin_digest: t];
-      [%expect {| 86ba5df747eec837f0b391dd49f33f9e |}]
-    ;;
   end
 end
 

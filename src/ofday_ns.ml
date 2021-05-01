@@ -258,31 +258,6 @@ let small_diff =
     Span.of_int63_ns d
 ;;
 
-let%expect_test "small_diff" =
-  let test x y =
-    let diff = small_diff x y in
-    printf !"small_diff %s %s = %s\n" (to_string x) (to_string y) (Span.to_string diff)
-  in
-  let examples =
-    List.map
-      ~f:(fun (x, y) -> of_string x, of_string y)
-      [ "12:00", "12:05"; "12:58", "13:02"; "00:52", "23:19"; "00:00", "24:00" ]
-  in
-  List.iter examples ~f:(fun (x, y) ->
-    test x y;
-    test y x);
-  [%expect
-    {|
-    small_diff 12:00:00.000000000 12:05:00.000000000 = -5m
-    small_diff 12:05:00.000000000 12:00:00.000000000 = 5m
-    small_diff 12:58:00.000000000 13:02:00.000000000 = -4m
-    small_diff 13:02:00.000000000 12:58:00.000000000 = 4m
-    small_diff 00:52:00.000000000 23:19:00.000000000 = -27m
-    small_diff 23:19:00.000000000 00:52:00.000000000 = 27m
-    small_diff 00:00:00.000000000 24:00:00.000000000 = 0s
-    small_diff 24:00:00.000000000 00:00:00.000000000 = 0s |}]
-;;
-
 let gen_incl = Span.gen_incl
 let gen_uniform_incl = Span.gen_uniform_incl
 let quickcheck_generator = gen_incl start_of_day start_of_next_day

@@ -8,11 +8,6 @@ module Symmetric_diff_element = struct
       type ('k, 'v) t = 'k * [ `Left of 'v | `Right of 'v | `Unequal of 'v * 'v ]
       [@@deriving bin_io, compare, sexp]
 
-      let%expect_test _ =
-        print_endline [%bin_digest: (int, string) t];
-        [%expect {| 00674be9fe8dfe9e9ad476067d7d8101 |}]
-      ;;
-
       let map (k, diff) ~f1 ~f2 =
         let k = f1 k in
         let diff =

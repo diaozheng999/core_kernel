@@ -31,15 +31,6 @@ module Stable = struct
             let of_binable = of_serializable
           end)
 
-      let%expect_test "stable" =
-        print_endline [%bin_digest: t];
-        print_endline [%bin_digest: Serializable.t];
-        [%expect
-          {|
-                  957990f0fc4161fb874e66872550fb40
-                  957990f0fc4161fb874e66872550fb40 |}]
-      ;;
-
       include
         Sexpable.Stable.Of_sexpable.V1
           (Serializable)
@@ -80,23 +71,6 @@ module Stable = struct
     include T1
     include Comparable.Stable.V1.Make (T1)
 
-    let%test_unit "t_of_sexp" =
-      [%test_result: t]
-        (t_of_sexp (Sexp.of_string {|(localhost 8080)|}))
-        ~expect:{ host = "localhost"; port = 8080 };
-      [%test_result: t]
-        (t_of_sexp (Sexp.of_string {|localhost:8080|}))
-        ~expect:{ host = "localhost"; port = 8080 }
-    ;;
-
-    let%test_unit "sexp roundtrip" =
-      let open Quickcheck.Let_syntax in
-      Quickcheck.test
-        (let%map host = String.quickcheck_generator
-         and port = Int.quickcheck_generator in
-         { host; port })
-        ~f:(fun t -> [%test_result: t] (t_of_sexp (sexp_of_t t)) ~expect:t)
-    ;;
   end
 end
 

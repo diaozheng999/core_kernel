@@ -70,10 +70,6 @@ module Stable = struct
         }
       [@@deriving bin_io, compare, sexp]
 
-      let%expect_test _ =
-        print_endline [%bin_digest: t];
-        [%expect {| bd8d6fb7a662d2c0b5e0d2026c6d2d21 |}]
-      ;;
     end
 
     module Model = V1
@@ -89,10 +85,6 @@ module Stable = struct
         }
       [@@deriving bin_io, compare, fields, sexp]
 
-      let%expect_test _ =
-        print_endline [%bin_digest: t];
-        [%expect {| 8faac1e8d9deb0baaa56ac8ebf85b498 |}]
-      ;;
     end
 
     module V1 = struct
@@ -135,11 +127,6 @@ module Stable = struct
         }
       [@@deriving bin_io, compare, sexp]
 
-      let%expect_test _ =
-        print_endline [%bin_digest: a t];
-        [%expect {| 2cc3eeb58d12d8fe4400009e592d7827 |}]
-      ;;
-
       open! Base
 
       let map t ~f =
@@ -156,11 +143,6 @@ module Stable = struct
         ; subcommands : (string * 'a) List.Stable.V1.t
         }
       [@@deriving bin_io, compare, sexp]
-
-      let%expect_test _ =
-        print_endline [%bin_digest: a t];
-        [%expect {| 2cc3eeb58d12d8fe4400009e592d7827 |}]
-      ;;
 
       open! Base
 
