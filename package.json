@@ -1,0 +1,20 @@
+{
+  "name": "@nasi/js-core-kernel",
+  "version": "0.0.0-unstable.1",
+  "description": "ReScript port of Jane Street's Core_kernel",
+  "devDependencies": {
+    "bs-platform": "^9.0.2",
+    "ppx-install": "^0.3.0"
+  },
+  "scripts": {
+    "build": "bsb -make-world",
+    "clean": "bsb -clean-world"
+  },
+  "ppx": [
+    "@opam/ppx_jane",
+    "@nasi/ppx-remove-deriving"
+  ],
+  "dependencies": {
+    "@nasi/js-base": "0.0.0-unstable.1"
+  }
+}

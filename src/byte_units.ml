@@ -195,29 +195,6 @@ module Stable = struct
     let to_string t = String.lowercase (to_string t)
     let of_string = of_string
 
-    (* This test documents the original to-string representation and fails under javascript
-       due to differences in the rounding. *)
-    let%expect_test (_[@tags "no-js"]) =
-      printf !"%{}" (of_bytes_int 1000);
-      [%expect {| 1000b |}];
-      printf !"%{}" (of_bytes_int 1023);
-      [%expect {| 1023b |}];
-      printf !"%{}" (of_bytes_int 1024);
-      [%expect {| 1k |}];
-      printf !"%{}" (of_bytes_int 1025);
-      [%expect {| 1.00098k |}];
-      printf !"%{}" (of_bytes_int 1500);
-      [%expect {| 1.46484k |}];
-      printf !"%{}" (of_bytes_int 10000);
-      [%expect {| 9.76562k |}];
-      printf !"%{}" (of_bytes_int 100000);
-      [%expect {| 97.6562k |}];
-      printf !"%{}" (of_bytes_int 1000000);
-      [%expect {| 976.562k |}];
-      printf !"%{}" (of_bytes_int 10000000);
-      [%expect {| 9.53674m |}]
-    ;;
-
     let t_of_sexp sexp =
       match sexp with
       | Sexp.Atom s ->

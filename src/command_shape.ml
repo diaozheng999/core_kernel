@@ -14,11 +14,6 @@ module Stable = struct
           | Ad_hoc of string
         [@@deriving bin_io, compare, sexp]
 
-        let%expect_test _ =
-          print_endline [%bin_digest: t];
-          [%expect {| a17fd34ec213e508db450f6469f7fe99 |}]
-        ;;
-
         let rec invariant t =
           Base.Invariant.invariant [%here] t [%sexp_of: t] (fun () ->
             match t with
@@ -61,10 +56,6 @@ module Stable = struct
         | Grammar of Grammar.V1.t
       [@@deriving bin_io, compare, sexp]
 
-      let%expect_test _ =
-        print_endline [%bin_digest: t];
-        [%expect {| 081d9ec167903f8f8c49cbf8e3fb3a66 |}]
-      ;;
     end
 
     module Model = V2

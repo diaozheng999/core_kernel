@@ -1,0 +1,23 @@
+{
+  "name": "@nasi/js-core-kernel",
+  "namespace": "core_kernel",
+  "version": "0.0.0-unstable.1",
+  "sources": {
+    "dir" : "src",
+    "subdirs" : true
+  },
+  "package-specs": {
+    "module": "commonjs",
+    "in-source": false
+  },
+  "suffix": ".bs.js",
+  "bs-dependencies": [
+    "@nasi/js-sexplib0",
+    "@nasi/js-base"
+  ],
+  "warnings": {
+    "number": "-44-60",
+    "error" : "+101"
+  },
+  "ppx-flags": ["ppx-install"]
+}
